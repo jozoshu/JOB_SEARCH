@@ -1,0 +1,25 @@
+{
+  "name": "job-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jozoshu/JOB_SEARCH.git"
+  },
+  "author": "jozoshu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jozoshu/JOB_SEARCH/issues"
+  },
+  "homepage": "https://github.com/jozoshu/JOB_SEARCH#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "pg": "^8.7.1"
+  }
+}
