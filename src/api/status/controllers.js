@@ -1,34 +1,27 @@
 import pgConnect from '../config/postgres';
-import { Query } from 'pg';
+import errorMessages from '../core/errorMessages';
+import ApiException from '../core/exceptions';
+errorMessages
 
-const lastSuccess = (req, res) => {
+const getLastSuccess = (req, res) => {
     const type = req.query.type;
     if (type) {
-        const client = pgConnect();
-        const query = new Query(`
+        const pool = pgConnect();
+        pool.query(`
             SELECT  handler_type
-                , last_crawl_date 
+                  , last_crawl_date 
             FROM    tb_op_last_crawl_date 
-            WHERE   handler_type = '${type.toUpperCase()}'`
+            WHERE   handler_type = '${type.toUpperCase()}'`, 
+            (err, result) => {
+                if (err) {
+                    throw new ApiException(errorMessages.QUERY_ERROR);
+                }
+                res.status(200).json(result.rows);
+            }
         );
-        client.query(query);
-
-        var rows = [];
-        query.on('row', row => {
-            rows.push(row)
-        });
-        query.on('end', () => {
-            res.send(rows);
-            res.status(200).end();
-        });
-        query.on('error', err => {
-            res.send({'data': err.message});
-            res.status(400).end();
-        });
     } else {
-        res.send({'data': 'Yot Must Contain Request Parameters: type'});
-        res.status(400).end();
+        throw new ApiException(errorMessages.INVALID_PARAMS);
     }
 }
 
-export default lastSuccess
+export default getLastSuccess

@@ -1,16 +1,15 @@
-import pg from 'pg';
+import { Pool } from 'pg';
 import settings from './settings';
 
 const pgConnect = () => {
-    const client = new pg.Client({
+    const pool = new Pool({
         host: settings.DB_HOST,
         database: settings.DB_NAME,
         user: settings.DB_USER,
         password: settings.DB_PASSWORD,
         port: settings.DB_PORT
     });
-    client.connect();
-    return client
+    return pool
 }
 
 export default pgConnect

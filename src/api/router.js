@@ -4,6 +4,7 @@ import statusRouter from './status/router'
 
 const router = Router();
 
+// route: /api
 router.use('/sample', sampleRouter);
 router.use('/status', statusRouter);
 
