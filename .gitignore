@@ -3,9 +3,13 @@
 # Modules
 /node_modules
 
+# Env Value File
+.env
+
 # Log files
 *.log
 *.log.*
+
 
 # MacOS System Files
 .DS_Store

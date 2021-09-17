@@ -1,19 +1,6 @@
-import express from "express";
-import dotenv from "dotenv";
-import { pg_connect } from "./src/api/core/postgres.js";
-import { sampleRouter } from "./src/api/sample/router.js";
+import { app } from "./app";
 
-dotenv.config();
-
-const app = express();
-const port = 3000;
-pg_connect(app);
-
-app.get("/", (req, res) => {
-    res.send("Search My Job!")
-});
-
-app.use("/", sampleRouter)
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log(`Starting server at http://localhost:${port}`)
