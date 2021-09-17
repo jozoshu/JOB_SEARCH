@@ -3,7 +3,7 @@
 # Modules
 /node_modules
 
-# Env Value File
+# Env Variables File
 .env
 
 # Log files
