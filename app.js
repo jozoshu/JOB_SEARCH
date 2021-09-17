@@ -1,14 +1,12 @@
-import express from "express";
-import { pgConnect } from "./src/api/config/postgres";
-import { apieRouter } from "./src/api/router";
+import express from 'express';
+import apieRouter from './src/api/router';
 
-export const app = express();
-
-// postgres
-pgConnect(app);
+const app = express();
 
 // route
-app.get("/", (req, res) => {
-    res.send("Search My Job!")
+app.get('/', (req, res) => {
+    res.send('Search My Job!')
 });
-app.use("/api", apieRouter)
+app.use('/api', apieRouter)
+
+export default app;

@@ -1,8 +1,10 @@
-import express from 'express';
+import { Router } from 'express';
 
-export const sampleRouter = express.Router();
+const router = Router();
 
-sampleRouter.get('/', (req, res) => {
-    const data = {"sample": "data"}
+router.get('/', (req, res) => {
+    const data = {'sample': 'data'}
     res.send(data);
 });
+
+export default router;

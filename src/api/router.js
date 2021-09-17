@@ -1,6 +1,10 @@
-import express from 'express';
-import { sampleRouter } from "./sample/router";
+import { Router } from 'express';
+import sampleRouter from './sample/router';
+import statusRouter from './status/router'
 
-export const apieRouter = express.Router();
+const router = Router();
 
-apieRouter.use("/sample", sampleRouter);
+router.use('/sample', sampleRouter);
+router.use('/status', statusRouter);
+
+export default router;
