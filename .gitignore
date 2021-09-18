@@ -11,5 +11,8 @@
 *.log.*
 
 
+# Editor Setting Files (Pycharm, VSCode ...)
+.vscode/
+
 # MacOS System Files
 .DS_Store
