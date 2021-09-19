@@ -1,15 +1,20 @@
-import { Pool } from 'pg';
+import { Client } from 'pg';
 import settings from './settings';
 
-const pgConnect = () => {
-    const pool = new Pool({
+const pgClient = () => {
+    const client = new Client({
         host: settings.DB_HOST,
         database: settings.DB_NAME,
         user: settings.DB_USER,
         password: settings.DB_PASSWORD,
         port: settings.DB_PORT
     });
-    return pool
+    client.connect(err => {
+        if (err) {
+            console.log('DB Connection Error:', settings.DB_HOST);
+        }
+    })
+    return client
 }
 
-export default pgConnect
+export default pgClient

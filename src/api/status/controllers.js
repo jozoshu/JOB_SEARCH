@@ -1,27 +1,27 @@
-import pgConnect from '../config/postgres';
+import pgClient from '../config/postgres';
 import errorMessages from '../core/errorMessages';
 import ApiException from '../core/exceptions';
-errorMessages
+import query from './queries';
 
-const getLastSuccess = (req, res) => {
-    const type = req.query.type;
-    if (type) {
-        const pool = pgConnect();
-        pool.query(`
-            SELECT  handler_type
-                  , last_crawl_date 
-            FROM    tb_op_last_crawl_date 
-            WHERE   handler_type = '${type.toUpperCase()}'`, 
-            (err, result) => {
-                if (err) {
-                    throw new ApiException(errorMessages.QUERY_ERROR);
+export const getLastCrawl = async (req, res) => {
+    return new Promise((resolve, reject) => {
+        const type = req.query.type;
+        const client = pgClient();
+        if (type) {
+            client.query(
+                query.getLastCrawlDateByType, [type.toUpperCase()],
+                (err, res) => {
+                    if (err) {
+                        reject(new ApiException(errorMessages.QUERY_ERROR));
+                    } else {
+                        resolve(res.rows)
+                    }
                 }
-                res.status(200).json(result.rows);
-            }
-        );
-    } else {
-        throw new ApiException(errorMessages.INVALID_PARAMS);
-    }
+            );
+        } else {
+            throw new ApiException(errorMessages.INVALID_PARAMS);
+        }
+    })
 }
 
-export default getLastSuccess
+export default {getLastCrawl};

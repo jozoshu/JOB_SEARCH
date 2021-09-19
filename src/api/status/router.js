@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import sendFormat from '../core/response';
-import getLastSuccess from './controllers';
+import resFormat from '../core/response';
+import controller from './controllers';
 
 const router = Router();
 
 // route: /api/status
-router.get('/last-success', sendFormat(getLastSuccess));
+router.get('/last-crawled', resFormat(controller.getLastCrawl));
 
 export default router;
